@@ -7,6 +7,9 @@ strongly recommended.
 """
 function artist(base=exp(1), colormap=ColorSchemes.cyclic_mygbm_30_95_c78_n256)
     return function(z)
+        if isnan(z)
+            return RGBA{Float32}(0, 0, 0, 0)
+        end
         s1 = mod(log(base, abs(z)), 1)
         s2 = mod2pi(angle(z)) / 2π
         col = convert(Colors.HSV, get(colormap, s2, (0, 1)))
@@ -29,7 +32,6 @@ complex plane.
 
 # Examples
 ```julia
-using CairoMakie
 zplot(z -> (z^3 - 1) / sin(2im - z))
 zplot(tanh)
 zplot(tanh, coloring=artist(1.5))  # to see more magnitude contours

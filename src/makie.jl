@@ -94,15 +94,15 @@ complex_theme = Makie.Theme(
 #####
 
 # Convert a pathlike object to a vector of points
-plottype(::AbstractCurveOrPath) = Lines
-plottype(::AbstractVector{<:AbstractCurveOrPath}) = Series
+Makie.plottype(::AbstractCurveOrPath) = Lines
+Makie.plottype(::AbstractVector{<:AbstractCurveOrPath}) = Series
 curve_to_points(c::AbstractCurveOrPath) = z_to_point.(plotdata(c))
-convert_arguments(::PointBased, c::AbstractCurveOrPath) = (curve_to_points(c), )
+Makie.convert_arguments(::PointBased, c::AbstractCurveOrPath) = (curve_to_points(c), )
 
 # Plot a compound boundary (e.g., from a generic ConnectedRegion)
 Compound = Tuple{Union{Nothing,AbstractJordan}, Vector{<:AbstractJordan}}
 # plottype(::Compound) = Series
-function plot!(plt::Combined{Any, S} where S<:Tuple{Compound})
+function Makie.plot!(plt::Combined{Any, S} where S<:Tuple{Compound})
     outer, inner = plt[1][]
     if !isnothing(outer)
         Makie.plot!(plt, outer)
@@ -116,25 +116,24 @@ end
 #####
 
 # Convert a generic region to a Makie Polygon
-plottype(::AbstractRegion) = Poly
-function convert_arguments(PT::Type{<:Poly}, R::ConnectedRegion{N}) where N
-    @show PT
+Makie.plottype(::AbstractRegion) = Poly
+function Makie.convert_arguments(PT::Type{<:Poly}, R::ConnectedRegion{N}) where N
     outer = curve_to_points(outerboundary(R))
     inner = curve_to_points.(innerboundary(R))
     return convert_arguments(PT, GB.Polygon(outer, inner))
 end
 
 # Conversions for particular cases
-function convert_arguments(PT::Type{<:Poly}, R::InteriorSimplyConnectedRegion)
+function Makie.convert_arguments(PT::Type{<:Poly}, R::InteriorSimplyConnectedRegion)
     ∂R = curve_to_points(boundary(R))
     return convert_arguments(PT, GB.Polygon(∂R))
 end
 
-function convert_arguments(PT::Type{<:Poly}, R::ExteriorSimplyConnectedRegion)
+function Makie.convert_arguments(PT::Type{<:Poly}, R::ExteriorSimplyConnectedRegion)
     return convert_arguments(PT, truncate(R))
 end
 
-function convert_arguments(PT::Type{<:Poly}, R::ExteriorRegion{N}) where N
+function Makie.convert_arguments(PT::Type{<:Poly}, R::ExteriorRegion{N}) where N
     return convert_arguments(PT, truncate(R))
 end
 
@@ -150,4 +149,4 @@ function Base.truncate(R::ExteriorRegion)
     return ConnectedRegion(C, ∂R)
 end
 
-convert_arguments(PT::Type{<:Poly}, A::Annulus) = convert_arguments(PT, ConnectedRegion{2}(A.outer, [A.inner]))
+Makie.convert_arguments(PT::Type{<:Poly}, A::Annulus) = convert_arguments(PT, ConnectedRegion{2}(A.outer, [A.inner]))

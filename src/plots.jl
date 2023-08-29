@@ -4,12 +4,12 @@ using .Plots
 ##### Polar and Spherical
 #####
 
-@recipe function f(z::Array{Polar{T}}) where {T}
+Plots.@recipe function f(z::Array{Polar{T}}) where {T}
     projection --> :polar
     angle.(z), abs.(z)
 end
 
-@recipe function f(z::Array{Spherical{T}}; sphere=true) where {T}
+Plots.@recipe function f(z::Array{Spherical{T}}; sphere=true) where {T}
     delete!(plotattributes, :sphere)
     markersize --> 1
     aspect_ratio --> 1
@@ -102,13 +102,13 @@ end
 ##### Curves and paths
 #####
 
-@recipe function f(::Type{T},C::T) where T <: AbstractCurve
+Plots.@recipe function f(::Type{T}, C::T) where T <: AbstractCurve
     aspect_ratio --> 1.0
     plotdata(C)
 end
 
-@recipe function f(P::AbstractPath; vertices=false)
-    delete!(plotattributes,:vertices)
+Plots.@recipe function f(P::AbstractPath; vertices=false)
+    delete!(plotattributes, :vertices)
     aspect_ratio --> 1.0
 
     @series begin
@@ -126,15 +126,15 @@ end
     end
 end
 
-@recipe function f(p::AbstractCircularPolygon)
+Plots.@recipe function f(p::AbstractCircularPolygon)
     if isfinite(p)
         p.path
     else
-        C = ComplexRegions.enclosing_circle(p,8)
-        q = truncate(p,C)
-        z,R = C.center,C.radius/3
-        xlims --> (real(z)-R,real(z)+R)
-        ylims --> (imag(z)-R,imag(z)+R)
+        C = ComplexRegions.enclosing_circle(p, 8)
+        q = truncate(p, C)
+        z, R = C.center, C.radius / 3
+        xlims --> (real(z) - R, real(z) + R)
+        ylims --> (imag(z) - R, imag(z) + R)
         q.path
     end
 end
@@ -143,7 +143,7 @@ end
 ##### Regions
 #####
 
-@recipe function f(::Type{T}, R::T) where T<:SimplyConnectedRegion
+Plots.@recipe function f(::Type{T}, R::T) where T<:SimplyConnectedRegion
    if R isa ExteriorSimplyConnectedRegion
         seriestype := :shapecomplement
     else
@@ -162,26 +162,26 @@ end
     end
 end
 
-@recipe function f(R::ExteriorSimplyConnectedRegion)
+Plots.@recipe function f(R::ExteriorSimplyConnectedRegion)
     P = innerboundary(R)
-    C = enclosing_circle(ClosedPath(P),8)
+    C = ComplexRegions.enclosing_circle(ClosedPath(P),8)
     zc = C.center
     r = 0.2*C.radius
-    xlims --> [real(zc)-r,real(zc)+r]
-    ylims --> [imag(zc)-r,imag(zc)+r]
+    xlims --> [real(zc) - r, real(zc) + r]
+    ylims --> [imag(zc) - r, imag(zc) + r]
     between(C,P)
 end
 
-@recipe function f(R::Union{ConnectedRegion,ExteriorRegion})
+Plots.@recipe function f(R::Union{ConnectedRegion,ExteriorRegion})
     p0 = outerboundary(R)
     p1 = innerboundary(R)
     z1 = [plotdata(p) for p in p1]
     if isnothing(p0)
-        zc,rho = ComplexRegions.enclosing_circle(vcat(z1...),8)
-        p0 = Circle(zc,rho)
+        zc, rho = ComplexRegions.enclosing_circle(reduce(vcat, z1), 8)
+        p0 = ComplexRegions.Circle(zc, rho)
         r = 0.2*rho
-        xlims --> [real(zc)-r,real(zc)+r]
-        ylims --> [imag(zc)-r,imag(zc)+r]
+        xlims --> [real(zc) - r, real(zc) + r]
+        ylims --> [imag(zc) - r, imag(zc) + r]
     end
     z0 = plotdata(p0)
     # This is not fast, but I don't see a shortcut...
@@ -192,10 +192,10 @@ end
     dist = fill(Inf,n,n)
     for i in 1:n
         for j in i+1:n
-            ka,kb = argclosest(comp[i],comp[j])
-            index[i,j] = (ka,kb)
-            index[j,i] = (kb,ka)
-            dist[i,j] = dist[j,i] = abs(comp[i][ka]-comp[j][kb])
+            ka, kb = argclosest(comp[i], comp[j])
+            index[i, j] = (ka, kb)
+            index[j, i] = (kb, ka)
+            dist[i, j] = dist[j, i] = abs(comp[i][ka] - comp[j][kb])
         end
     end
 
@@ -205,9 +205,9 @@ end
     path = []
     while sum(unused) > 1
         u = findall(unused)
-        k = argmin(dist[curr,u])
+        k = argmin(dist[curr, u])
         next = u[k]
-        push!(path,(curr,next))
+        push!(path, (curr, next))
         unused[next] = false
         curr = next
     end
@@ -225,11 +225,11 @@ end
         idx = index[p...]
         b = idx[1]
         if a > b
-            data_in = [data_in;zc[a:-1:b]]
-            data_out = [data_out;zc[a:end];zc[1:b]]
+            data_in = [data_in; zc[a:-1:b]]
+            data_out = [data_out; zc[a:end]; zc[1:b]]
         else
-            data_in = [data_in;zc[a:-1:1];zc[end:-1:b]]
-            data_out = [data_out;zc[a:b]]
+            data_in = [data_in; zc[a:-1:1]; zc[end:-1:b]]
+            data_out = [data_out; zc[a:b]]
         end
     end
     a = idx[2]

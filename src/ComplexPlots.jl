@@ -1,10 +1,15 @@
 module ComplexPlots
-using ComplexValues, ComplexRegions, RecipesBase, ColorSchemes, Colors, LinearAlgebra
+using ComplexValues, ComplexRegions, ColorSchemes, Colors, LinearAlgebra
 
 const AbstractCurve = ComplexRegions.AbstractCurve
 const AbstractPath = ComplexRegions.AbstractPath
+const AbstractCurveOrPath = Union{AbstractCurve, AbstractPath}
+const AbstractJordan = ComplexRegions.AbstractJordan
 const AbstractCircularPolygon = ComplexRegions.AbstractCircularPolygon
+const AbstractRegion = ComplexRegions.AbstractRegion
+const ExteriorRegion = ComplexRegions.ExteriorRegion
 const ExteriorSimplyConnectedRegion = ComplexRegions.ExteriorSimplyConnectedRegion
+const InteriorSimplyConnectedRegion = ComplexRegions.InteriorSimplyConnectedRegion
 
 export sphereplot, sphereplot!, zplot, zplot!, artist
 include("common.jl")

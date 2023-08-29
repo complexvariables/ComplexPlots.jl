@@ -6,20 +6,22 @@ DocMeta.setdocmeta!(ComplexPlots, :DocTestSetup, :(using ComplexPlots); recursiv
 makedocs(;
     modules=[ComplexPlots],
     authors="Toby Driscoll",
-    repo="https://github.com/tobydriscoll/ComplexPlots.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/complexvariables/ComplexPlots.jl.git",
     sitename="ComplexPlots.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://tobydriscoll.github.io/ComplexPlots.jl",
+        canonical="https://complexvariables.github.io/ComplexPlots.jl",
         edit_link="main",
         assets=String[],
     ),
     pages=[
         "Home" => "index.md",
+        "Makie examples" => "makie.md",
+        "Plots examples" => "plots.md",
     ],
 )
 
 deploydocs(;
-    repo="github.com/tobydriscoll/ComplexPlots.jl",
+    repo="github.com/complexvariables/ComplexPlots.jl",
     devbranch="main",
 )

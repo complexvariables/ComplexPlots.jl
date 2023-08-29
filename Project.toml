@@ -1,7 +1,7 @@
 name = "ComplexPlots"
 uuid = "1fd36721-02e5-4f31-ac70-029fcd7253d3"
 authors = ["Toby Driscoll"]
-version = "1.0.0-DEV"
+version = "0.1.0"
 
 [deps]
 ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
@@ -9,12 +9,15 @@ Colors = "5ae59095-9a9b-59fe-a467-6f913c188581"
 ComplexRegions = "c64915e2-6c82-11e9-38e9-1f159a780463"
 ComplexValues = "41a84b80-6cf2-11e9-379d-9df124847946"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
-MakieCore = "20f20a25-4f0e-4fdf-b5d1-57303727442b"
-RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
 Requires = "ae029012-a4dd-5104-9daa-d747884805df"
 
 [compat]
 julia = "1"
+ColorSchemes = "3"
+Colors = "0"
+ComplexRegions = "0"
+ComplexValues = "0"
+Requires = "1"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

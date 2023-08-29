@@ -14,9 +14,9 @@ Requires = "ae029012-a4dd-5104-9daa-d747884805df"
 [compat]
 julia = "1"
 ColorSchemes = "3"
-Colors = "0"
-ComplexRegions = "0"
-ComplexValues = "0"
+Colors = "0.12"
+ComplexRegions = "0.2"
+ComplexValues = "0.3"
 Requires = "1"
 
 [extras]

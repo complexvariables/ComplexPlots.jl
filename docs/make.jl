@@ -24,4 +24,5 @@ makedocs(;
 deploydocs(;
     repo="github.com/complexvariables/ComplexPlots.jl",
     devbranch="main",
+    versions="stable" => "v^",
 )

@@ -13,7 +13,7 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: julia-actions/setup-julia@v1
         with:
           version: '1.9'
@@ -29,3 +29,5 @@ jobs:
             cd docs;
             DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24'
             julia --color=yes --project=. make.jl
+            ls -la
+            ls -la build

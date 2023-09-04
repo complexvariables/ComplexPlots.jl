@@ -20,7 +20,7 @@ Vectors of points can be plotted on the surface of the Riemann sphere. The synta
 Plots of complex functions can be made in the style of [Wegert and Semmler](http://arxiv.org/abs/1007.2295) using the `zplot` function. At each point in the complex domain, the hue is selected from a cyclic colormap using the phase of the function value, and the color value (similar to lightness) is chosen by the fractional part of the log of the function value's magnitude.
 
 ```@setup
-using GLMakie
+using WGLMakie
 ```
 
 ```@docs

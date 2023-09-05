@@ -31,5 +31,5 @@ jobs:
             julia --color=yes --project=. make.jl
       - name: List build files
         run: |
-            ls -la
-            ls -la build
+            ls -la docs
+            ls -la docs/build

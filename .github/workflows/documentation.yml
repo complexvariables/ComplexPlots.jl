@@ -30,6 +30,6 @@ jobs:
             DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24'
             julia --color=yes --project=. make.jl
       - name: List build files
-        run: >
+        run: |
             ls -la
             ls -la build

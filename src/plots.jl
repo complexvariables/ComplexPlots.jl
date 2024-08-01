@@ -102,7 +102,7 @@ end
 ##### Curves and paths
 #####
 
-Plots.@recipe function f(::Type{T}, C::T) where T <: AbstractCurve
+Plots.@recipe function f(C::AbstractCurve)
     aspect_ratio --> 1.0
     plotdata(C)
 end

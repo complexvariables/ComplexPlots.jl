@@ -1,5 +1,6 @@
 using ComplexPlots
 using Documenter
+using Logging
 
 DocMeta.setdocmeta!(ComplexPlots, :DocTestSetup, :(using ComplexPlots); recursive=true)
 
@@ -21,6 +22,7 @@ makedocs(;
     ],
 )
 
+global_logger(ConsoleLogger(stderr, Logging.Debug));
 deploydocs(;
     repo="github.com/complexvariables/ComplexPlots.jl",
     devbranch="main",

@@ -1,7 +1,7 @@
 name = "ComplexPlots"
 uuid = "1fd36721-02e5-4f31-ac70-029fcd7253d3"
 authors = ["Toby Driscoll"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"

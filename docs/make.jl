@@ -7,8 +7,9 @@ DocMeta.setdocmeta!(ComplexPlots, :DocTestSetup, :(using ComplexPlots); recursiv
 makedocs(;
     modules=[ComplexPlots],
     authors="Toby Driscoll",
-    repo="https://github.com/complexvariables/ComplexPlots.jl.git",
+    repo=Remotes.GitHub("complexvariables", "ComplexPlots.jl"),
     sitename="ComplexPlots.jl",
+    checkdocs=:exports,
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://complexvariables.github.io/ComplexPlots.jl",

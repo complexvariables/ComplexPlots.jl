@@ -106,7 +106,7 @@ There are some predefined shapes in the `Shapes` submodule.
 
 ```@example makie
 lines(Shapes.ellipse(1, 0.5))
-series!([
+lines!.([
     2im + Shapes.star, 
     -2im + Shapes.cross,
     2 + Shapes.triangle,

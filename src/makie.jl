@@ -2,10 +2,7 @@ using .Makie
 const Target = Union{Makie.GridPosition, Makie.Axis, Makie.FigureAxisPlot}
 const GB = Makie.GeometryBasics
 export complex_theme
-# import .Makie
 using ColorSchemes
-# using .Makie: PointBased, Poly, Lines, Series, Point2f, Combined, with_theme
-# import .Makie: convert_arguments, plottype, plot!
 
 # Allow plot of any complex vector
 z_to_point(z::Complex{T} where T) = Makie.Point2f(reim(z)...)
@@ -102,7 +99,7 @@ Makie.convert_arguments(::PointBased, c::AbstractCurveOrPath) = (curve_to_points
 # Plot a compound boundary (e.g., from a generic ConnectedRegion)
 Compound = Tuple{Union{Nothing,AbstractJordan}, Vector{<:AbstractJordan}}
 # plottype(::Compound) = Series
-function Makie.plot!(plt::Combined{Any, S} where S<:Tuple{Compound})
+function Makie.plot!(plt::Tuple{Compound})
     outer, inner = plt[1][]
     if !isnothing(outer)
         Makie.plot!(plt, outer)

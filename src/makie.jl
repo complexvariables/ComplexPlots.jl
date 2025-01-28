@@ -62,7 +62,7 @@ end
 #####
 
 function zplot(args...; kw...)
-    fig = Makie.Figure(resolution=(1000, 1000))
+    fig = Makie.Figure(size=(1000, 1000))
     ax = Makie.Axis(fig[1,1], autolimitaspect=1)
     return Makie.FigureAxisPlot(fig, ax, zplot!(ax, args...; kw...))
 end
@@ -75,7 +75,7 @@ function zplot!(
     coloring=artist()
     )
     s = coloring.(z)
-    return Makie.surface!(ax, x, y, zero(x); color=s, shading=false)
+    return Makie.surface!(ax, x, y, zero(x); color=s, shading=NoShading)
 end
 
 complex_theme = Makie.Theme(

@@ -66,11 +66,12 @@ plot!(Arc(-1, 1im, 1))
 On the Riemann sphere, lines and circles are all simply circles, as are their inverses:
 
 ```@example plots
-c = Spherical(Circle(0, 1))
-l = Spherical(Line(-1, 1im))
-plot(c); plot!(l, sphere=false)
-plot!(1/c, sphere=false)
-plot!(1/l, sphere=false)
+c = Circle(0, 1)
+l = Line(-1, 1im)
+plot(c, spherical=true)
+plot!(l, spherical=true)
+plot!(1/c, spherical=true)
+plot!(1/l, spherical=true)
 ```
 
 You can also create and plot polygons.

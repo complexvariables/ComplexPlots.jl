@@ -102,12 +102,13 @@ end
 ##### Curves and paths
 #####
 
-Plots.@recipe function f(C::AbstractCurve)
+Plots.@recipe function f(C::AbstractCurve; spherical=false)
     aspect_ratio --> 1.0
-    plotdata(C)
+    delete!(plotattributes, :spherical)
+    spherical ? Spherical.(plotdata(C)) : plotdata(C)
 end
 
-Plots.@recipe function f(P::AbstractPath; vertices=false)
+Plots.@recipe function f(P::AbstractPath, vertices=false)
     delete!(plotattributes, :vertices)
     aspect_ratio --> 1.0
 

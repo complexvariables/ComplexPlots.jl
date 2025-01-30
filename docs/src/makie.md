@@ -1,7 +1,7 @@
 # Complex plane plots in `Plots`
 
 ```@setup makie
-using GLMakie
+using CairoMakie
 update_theme!(linewidth=3, Axis=(autolimitaspect=1,))
 ```
 The plots below are made using the defaults
@@ -14,7 +14,7 @@ update_theme!(linewidth=3, Axis=(autolimitaspect=1,))
 A vector of complex-typed values will be interpreted as specifying points using the real and imaginary parts.
 
 ```@example makie
-using ComplexPlots, GLMakie
+using ComplexPlots, CairoMakie
 z = [complex(cospi(t), 0.4sinpi(t)) for t in (0:400)/200]
 lines(z)
 scatter!(1 ./ z, marker=:circle, markersize=8, color=:black)
@@ -25,7 +25,7 @@ save("makie_points.png", current_figure()); nothing # hide
 Use `sphereplot` to make plots on the Riemann sphere.
 
 ```@example makie
-sphereplot(z)
+sphereplot(z, markersize=5)
 save("makie_sphere.png", current_figure()); nothing # hide
 ```
 ![](makie_sphere.png)

@@ -13,7 +13,7 @@ Requires = "ae029012-a4dd-5104-9daa-d747884805df"
 
 [compat]
 ColorSchemes = "3"
-Colors = "0.12"
+Colors = "0.13"
 ComplexValues = "0.3"
 ComplexRegions = "0.2, 0.3"
 Requires = "1"
